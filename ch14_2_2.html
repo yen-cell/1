@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>ch14_2_2.html</title>
+</head>
+<script>
+function playPause(){
+var myVideo=document.getElementById("myVideo");
+var status=document.getElementById("status");
+if (myVideo.paused){
+	myVideo.play();
+	status.innerHTML="播放中...";
+	}
+else{
+	myVideo.pause();
+	status.innerHTML="暫停";
+	}
+}
+
+</script>
+
+<body>
+<h2>視訊</h2>
+<hr/>
+<video id="myVideo" poster="sample.jpg" width="320"height="240">
+<source src="sam.mp4"/>
+
+
+</video>
+<div>
+<button onclick="playPause()">播放/暫停</button>
+<span id="status" style="color:red">暫停中...</span>
+</div>
+<div>
+音量:<input id="volume"type="range"
+	min="0"max="10"value="5"/>
+</div>
+<span id="duration"></span>
+<script>
+var myVideo=document.getElementById("myVideo");
+var volume=document.getElementById("volume");
+volume.addEventListener("change",function(){
+myVideo.volume=parseFloat(this.value/10);
+},false);
+myVideo.addEventListener("timeupdate",function(){
+var duration=document.getElementById("duration");
+var s1=parseInt(myVideo.currentTime%60);
+var m1=parseInt((myVideo.currentTime/60)%60);
+var s2=parseInt(myVideo.duration%60);
+var m2=parseInt((myVideo.duration/60)%60);
+duration.innerHTML=m1+"分:"+s1+"秒/"+m2+"分:"+s2+"秒";
+},false);
+</script>
+</body>
+</html>
